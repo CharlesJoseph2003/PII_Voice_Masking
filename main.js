@@ -200,11 +200,26 @@ async function processConversation() {
 async function cloneVoice() {
     try {
         console.log("Starting voice cloning...");
+        
+        // Read and parse both conversation files
+        const anonymizedData = JSON.parse(await fs.readFile("./anonymized_conversations.json", 'utf8'));
+        const extractedData = JSON.parse(await fs.readFile("./extracted_conversations.json", 'utf8'));
+
+        // Extract all SPEAKER_00 text from anonymized conversations
+        const speaker00Text = anonymizedData.conversations
+            .filter(conv => conv.speaker === "SPEAKER_00")
+            .map(conv => conv.text)
+            .join(" ");
+
+        // Get the first SPEAKER_00 text from extracted conversations
+        const referenceText = extractedData.conversations
+            .find(conv => conv.speaker === "SPEAKER_00")?.text || "";
+
         const file = await readFile("./output_speakers/SPEAKER_00_1.wav");
 
         const input = {
-            gen_text: "Hello my name is Jack. I am a voice assistant.",
-            ref_text: "Hi, my name is Charles Joseph. Where do you live?",
+            gen_text: speaker00Text,
+            ref_text: referenceText,
             ref_audio: file
         };
 
