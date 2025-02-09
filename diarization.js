@@ -1,5 +1,5 @@
 import Replicate from "replicate";
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { REPLICATE_API_TOKEN } from './config.js';
 
 async function diarizeAudio() {
@@ -25,8 +25,9 @@ async function diarizeAudio() {
             { input }
         );
 
-        console.log("Diarization complete! Output:");
-        console.log(JSON.stringify(output, null, 2));
+        console.log("Saving output to data.json...");
+        await writeFile('data.json', JSON.stringify(output, null, 2));
+        console.log("Diarization complete! Output saved to data.json");
     } catch (error) {
         console.error("Error:", error.message);
         process.exit(1);
