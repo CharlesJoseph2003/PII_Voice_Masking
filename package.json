@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
-    "openai": "^4.83.0"
+    "openai": "^4.83.0",
+    "replicate": "^1.0.1"
   }
 }
