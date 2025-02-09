@@ -3,14 +3,19 @@ import { REPLICATE_API_TOKEN } from './config.js';
 import { readFile } from "node:fs/promises";
 import { writeFile } from "node:fs/promises";
 
-// Read and parse the anonymized conversations
+// Read and parse both conversation files
 const anonymizedData = JSON.parse(await readFile("./anonymized_conversations.json", 'utf8'));
+const extractedData = JSON.parse(await readFile("./extracted_conversations.json", 'utf8'));
 
-// Extract all SPEAKER_01 text
-const speaker01Text = anonymizedData.conversations
+// Extract all SPEAKER_00 text from anonymized conversations
+const speaker00Text = anonymizedData.conversations
     .filter(conv => conv.speaker === "SPEAKER_00")
     .map(conv => conv.text)
     .join(" ");
+
+// Get the first SPEAKER_00 text from extracted conversations
+const referenceText = extractedData.conversations
+    .find(conv => conv.speaker === "SPEAKER_00")?.text || "";
 
 const replicate = new Replicate({
     auth: REPLICATE_API_TOKEN,
@@ -19,8 +24,8 @@ const replicate = new Replicate({
 const file = await readFile("./output_speakers/SPEAKER_00_1.wav");
 
 const input = {
-    gen_text: speaker01Text,
-    ref_text: "Hi, my name is Charles Joseph. Where do you live?",
+    gen_text: speaker00Text,
+    ref_text: referenceText,
     ref_audio: file
 };
 
