@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.3",
+    "openai": "^4.83.0",
+    "replicate": "^1.0.1"
+  }
+}
