@@ -3,7 +3,6 @@ import { promises as fs } from 'fs';
 
 // Add your OpenAI API key here as a string
 const openai = new OpenAI({
-    apiKey: "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"
 });
 
 async function anonymizeConversation(inputFile, outputFile) {
