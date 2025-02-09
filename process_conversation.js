@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { promises as fs } from 'fs';
 import { OPENAI_API_KEY } from './config.js';
 
+
 // Initialize OpenAI with API key from config
 const openai = new OpenAI({
     apiKey: OPENAI_API_KEY

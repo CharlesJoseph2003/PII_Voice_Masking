@@ -9,7 +9,7 @@ async function diarizeAudio() {
         });
 
         console.log("Reading audio file...");
-        const file = await readFile("test_audio.wav");
+        const file = await readFile("input.wav");
 
         console.log("Processing audio with Whisper diarization...");
         const input = {
