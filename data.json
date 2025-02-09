@@ -1,0 +1,104 @@
+{
+  "language": "en",
+  "num_speakers": 2,
+  "segments": [
+    {
+      "avg_logprob": -0.077,
+      "end": 10.5,
+      "speaker": "CUSTOMER",
+      "start": 0.0,
+      "text": "Hi, my name is John Doe. I'm calling because I noticed some unusual transactions on my account, and I need to verify what's going on."
+    },
+    {
+      "avg_logprob": -0.056,
+      "end": 20.3,
+      "speaker": "REPRESENTATIVE",
+      "start": 10.6,
+      "text": "Hi John, I’d be happy to assist you. For security purposes, can you please confirm your date of birth and billing address?"
+    },
+    {
+      "avg_logprob": -0.068,
+      "end": 30.2,
+      "speaker": "CUSTOMER",
+      "start": 20.5,
+      "text": "Sure. My date of birth is March 15, 1985, and my billing address is 1234 Elm Street, Springfield, IL, 62704."
+    },
+    {
+      "avg_logprob": -0.138,
+      "end": 40.6,
+      "speaker": "REPRESENTATIVE",
+      "start": 30.3,
+      "text": "Thank you, John. Let me pull up your account details... Okay, I see the transactions you’re referring to. Can you confirm the last four digits of your account number?"
+    },
+    {
+      "avg_logprob": -0.185,
+      "end": 50.9,
+      "speaker": "CUSTOMER",
+      "start": 40.7,
+      "text": "Yes, the last four digits of my account number are 4821."
+    },
+    {
+      "avg_logprob": -0.094,
+      "end": 60.2,
+      "speaker": "REPRESENTATIVE",
+      "start": 51.0,
+      "text": "Got it. I see two transactions from a retailer in Miami, Florida, totaling $375. Were these transactions made by you?"
+    },
+    {
+      "avg_logprob": -0.161,
+      "end": 70.5,
+      "speaker": "CUSTOMER",
+      "start": 60.3,
+      "text": "No, I haven’t been to Florida in years. These are definitely fraudulent charges."
+    },
+    {
+      "avg_logprob": -0.170,
+      "end": 80.3,
+      "speaker": "REPRESENTATIVE",
+      "start": 70.6,
+      "text": "Understood. I will immediately flag these as unauthorized and initiate a dispute. Your card ending in 4821 will be deactivated. Would you like us to send a replacement card to your current address?"
+    },
+    {
+      "avg_logprob": -0.206,
+      "end": 90.1,
+      "speaker": "CUSTOMER",
+      "start": 80.4,
+      "text": "Yes, please send it to my home address: 1234 Elm Street, Springfield, IL, 62704."
+    },
+    {
+      "avg_logprob": -0.113,
+      "end": 100.4,
+      "speaker": "REPRESENTATIVE",
+      "start": 90.2,
+      "text": "The replacement card will arrive in 5-7 business days. In the meantime, I recommend enabling transaction alerts via email or SMS. Would you like me to set that up for you?"
+    },
+    {
+      "avg_logprob": -0.089,
+      "end": 110.3,
+      "speaker": "CUSTOMER",
+      "start": 100.5,
+      "text": "Yes, please enable SMS alerts for my number: (555) 123-4567."
+    },
+    {
+      "avg_logprob": -0.124,
+      "end": 120.7,
+      "speaker": "REPRESENTATIVE",
+      "start": 110.4,
+      "text": "Done. You will now receive a text notification for every transaction above $10. Is there anything else I can assist you with today?"
+    },
+    {
+      "avg_logprob": -0.148,
+      "end": 130.2,
+      "speaker": "CUSTOMER",
+      "start": 120.8,
+      "text": "No, that covers everything. Thank you for your help!"
+    },
+    {
+      "avg_logprob": -0.178,
+      "end": 140.5,
+      "speaker": "REPRESENTATIVE",
+      "start": 130.3,
+      "text": "You're very welcome, John! Have a great day."
+    }
+  ]
+}
