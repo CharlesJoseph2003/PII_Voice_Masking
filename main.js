@@ -197,6 +197,35 @@ async function processConversation() {
     }
 }
 
+async function cloneVoice() {
+    try {
+        console.log("Starting voice cloning...");
+        const file = await readFile("./output_speakers/SPEAKER_00_1.wav");
+
+        const input = {
+            gen_text: "Hello my name is Jack. I am a voice assistant.",
+            ref_text: "Hi, my name is Charles Joseph. Where do you live?",
+            ref_audio: file
+        };
+
+        console.log("Processing voice clone with Replicate...");
+        const replicate = new Replicate({
+            auth: REPLICATE_API_TOKEN,
+        });
+        const output = await replicate.run(
+            "x-lance/f5-tts:87faf6dd7a692dd82043f662e76369cab126a2cf1937e25a9d41e0b834fd230e", 
+            { input }
+        );
+
+        console.log("Saving cloned voice to output.wav...");
+        await writeFile("output.wav", output);
+        console.log("Voice cloning complete! Output saved to output.wav");
+    } catch (error) {
+        console.error("Error in voice cloning:", error.message);
+        process.exit(1);
+    }
+}
+
 // Run the entire pipeline in sequence
 async function main() {
     try {
@@ -214,7 +243,17 @@ async function main() {
         console.log("\nStep 3: Running conversation processing...");
         await processConversation();
 
+        // Step 4: Run voice cloning
+        console.log("\nStep 4: Running voice cloning...");
+        await cloneVoice();
+
         console.log("\n=== Pipeline completed successfully! ===");
+        console.log("Generated files:");
+        console.log("1. data.json - Raw diarization output");
+        console.log("2. output_speakers/ - Extracted audio segments");
+        console.log("3. extracted_conversations.json - Extracted conversation");
+        console.log("4. anonymized_conversations.json - Final anonymized conversation");
+        console.log("5. output.wav - Cloned voice output");
     } catch (error) {
         console.error("\nPipeline error:", error.message);
         process.exit(1);
