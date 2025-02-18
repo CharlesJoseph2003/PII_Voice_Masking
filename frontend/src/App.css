@@ -90,47 +90,61 @@
 
 /* Upload Controls */
 .upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 2rem 0;
 }
 
-.file-input {
-  display: none;
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.button-common {
+  width: 160px;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s;
+  display: block;
 }
 
 .file-label {
   background-color: #61dafb;
   color: #282c34;
-  padding: 0.8rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-block;
-  margin-right: 1rem;
-  font-weight: bold;
-  transition: background-color 0.2s;
+}
+
+.upload-button {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.upload-button:not(:disabled) {
+  background-color: #61dafb;
+  color: #282c34;
 }
 
 .file-label:hover {
   background-color: #4fa8d1;
 }
 
-.upload-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
-}
-
 .upload-button:hover:not(:disabled) {
-  background-color: #45a049;
+  background-color: #4fa8d1;
 }
 
 .upload-button:disabled {
-  background-color: #cccccc;
   cursor: not-allowed;
+}
+
+.file-input {
+  display: none;
 }
 
 /* Audio Preview */

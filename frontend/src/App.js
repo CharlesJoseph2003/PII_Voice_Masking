@@ -61,24 +61,26 @@ function App() {
         <section className="upload-section">
           <h2>Try it yourself</h2>
           <div className="upload-container">
-            <input
-              type="file"
-              accept=".wav"
-              onChange={handleFileChange}
-              className="file-input"
-              id="file-input"
-            />
-            <label htmlFor="file-input" className="file-label">
-              Choose WAV File
-            </label>
-            
-            <button 
-              onClick={handleUpload}
-              className="upload-button"
-              disabled={!selectedFile}
-            >
-              Upload File
-            </button>
+            <div className="button-group">
+              <input
+                type="file"
+                accept=".wav"
+                onChange={handleFileChange}
+                className="file-input"
+                id="file-input"
+              />
+              <label htmlFor="file-input" className="button-common file-label">
+                Choose WAV File
+              </label>
+              
+              <button 
+                onClick={handleUpload}
+                className="button-common upload-button"
+                disabled={!selectedFile}
+              >
+                Run PII Masking
+              </button>
+            </div>
           </div>
 
           {audioURL && (
