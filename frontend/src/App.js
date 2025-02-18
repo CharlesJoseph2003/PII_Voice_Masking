@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [audioURL, setAudioURL] = useState(null);
+  const [outputAudioURL, setOutputAudioURL] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -23,45 +24,81 @@ function App() {
 
     // Here you can implement the upload logic to your backend
     console.log('File ready for upload:', selectedFile);
+    // Assuming the output audio URL is received from the backend
+    const outputAudioPath = '/final_output.wav';
+    setOutputAudioURL(outputAudioPath);
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Voice Cloak</h1>
-        <p>Upload your .wav file for processing</p>
+        <p>Voice Anonymization Demo</p>
       </header>
       
       <main className="App-main">
-        <div className="upload-container">
-          <input
-            type="file"
-            accept=".wav"
-            onChange={handleFileChange}
-            className="file-input"
-            id="file-input"
-          />
-          <label htmlFor="file-input" className="file-label">
-            Choose WAV File
-          </label>
-          
-          <button 
-            onClick={handleUpload}
-            className="upload-button"
-            disabled={!selectedFile}
-          >
-            Upload File
-          </button>
-        </div>
+        {/* Demo Section */}
+        <section className="demo-section">
+          <h2>Demo Example</h2>
+          <div className="audio-container">
+            <div className="audio-section">
+              <h3>Before</h3>
+              <audio controls src="/input.wav">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
 
-        {audioURL && (
-          <div className="audio-preview">
-            <h3>Audio Preview</h3>
-            <audio controls src={audioURL}>
-              Your browser does not support the audio element.
-            </audio>
+            <div className="audio-section">
+              <h3>After PII Masking</h3>
+              <audio controls src="/final_output.wav">
+                Your browser does not support the audio element.
+              </audio>
+            </div>
           </div>
-        )}
+        </section>
+
+        {/* Upload Section */}
+        <section className="upload-section">
+          <h2>Try it yourself</h2>
+          <div className="upload-container">
+            <input
+              type="file"
+              accept=".wav"
+              onChange={handleFileChange}
+              className="file-input"
+              id="file-input"
+            />
+            <label htmlFor="file-input" className="file-label">
+              Choose WAV File
+            </label>
+            
+            <button 
+              onClick={handleUpload}
+              className="upload-button"
+              disabled={!selectedFile}
+            >
+              Upload File
+            </button>
+          </div>
+
+          {audioURL && (
+            <div className="audio-preview">
+              <h3>Audio Preview</h3>
+              <audio controls src={audioURL}>
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )}
+
+          {outputAudioURL && (
+            <div className="audio-preview">
+              <h3>Anonymized Audio</h3>
+              <audio controls src={outputAudioURL}>
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )}
+        </section>
       </main>
     </div>
   );

@@ -1,28 +1,96 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #282c34;
+  color: white;
 }
 
 .App-header {
-  background-color: #282c34;
   padding: 2rem;
-  color: white;
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #61dafb;
+}
+
+.App-header p {
+  margin: 1rem 0 0;
+  font-size: 1.2rem;
+  color: #bbb;
 }
 
 .App-main {
-  max-width: 800px;
-  margin: 0 auto;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
 }
 
-.upload-container {
-  background-color: white;
+/* Demo Section */
+.demo-section {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.05);
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.demo-section h2 {
+  color: #61dafb;
   margin-bottom: 2rem;
+}
+
+/* Upload Section */
+.upload-section {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.upload-section h2 {
+  color: #61dafb;
+  margin-bottom: 2rem;
+}
+
+/* Audio Container */
+.audio-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.audio-section {
+  flex: 1;
+  min-width: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.audio-section h3 {
+  margin: 0 0 1rem 0;
+  color: #61dafb;
+}
+
+.audio-section audio {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Upload Controls */
+.upload-container {
+  margin: 2rem 0;
 }
 
 .file-input {
@@ -30,29 +98,30 @@
 }
 
 .file-label {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #e0e0e0;
-  color: #333;
+  background-color: #61dafb;
+  color: #282c34;
+  padding: 0.8rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
-  margin-bottom: 1rem;
-  transition: background-color 0.3s;
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
 .file-label:hover {
-  background-color: #d0d0d0;
+  background-color: #4fa8d1;
 }
 
 .upload-button {
-  padding: 12px 24px;
   background-color: #4CAF50;
   color: white;
+  padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
 .upload-button:hover:not(:disabled) {
@@ -64,19 +133,21 @@
   cursor: not-allowed;
 }
 
+/* Audio Preview */
 .audio-preview {
-  background-color: white;
-  padding: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .audio-preview h3 {
-  margin-top: 0;
-  color: #333;
+  color: #61dafb;
+  margin: 0 0 1rem 0;
 }
 
-audio {
+.audio-preview audio {
   width: 100%;
-  margin-top: 1rem;
 }
