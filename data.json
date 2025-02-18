@@ -3,704 +3,365 @@
   "num_speakers": 2,
   "segments": [
     {
-      "avg_logprob": -0.1306466536946816,
-      "end": 3.02,
+      "avg_logprob": -0.19148935599529998,
+      "end": 9.21,
       "speaker": "SPEAKER_01",
-      "start": 0.34,
-      "text": "Hi, I'm Jack Yu. What is your name?",
+      "start": 0.53,
+      "text": "Hi, how are you doing? Good, how are you? Doing good, doing good. So today we are at MIT, we are doing the Sunday hack. How are you liking it so far?",
       "words": [
         {
-          "end": 0.92,
-          "probability": 0.99267578125,
-          "start": 0.34,
+          "end": 0.97,
+          "probability": 0.8203125,
+          "start": 0.53,
           "word": "Hi,"
         },
         {
-          "end": 1.24,
-          "probability": 0.998046875,
-          "start": 0.92,
-          "word": "I'm"
+          "end": 1.13,
+          "probability": 0.99609375,
+          "start": 1.03,
+          "word": "how"
         },
         {
-          "end": 1.56,
-          "probability": 0.9970703125,
-          "start": 1.24,
-          "word": "Jack"
-        },
-        {
-          "end": 1.88,
-          "probability": 0.880859375,
-          "start": 1.56,
-          "word": "Yu."
-        },
-        {
-          "end": 2.44,
-          "probability": 1,
-          "start": 2.08,
-          "word": "What"
-        },
-        {
-          "end": 2.58,
-          "probability": 1,
-          "start": 2.44,
-          "word": "is"
-        },
-        {
-          "end": 2.76,
-          "probability": 1,
-          "start": 2.58,
-          "word": "your"
-        },
-        {
-          "end": 3.02,
-          "probability": 1,
-          "start": 2.76,
-          "word": "name?"
-        }
-      ]
-    },
-    {
-      "avg_logprob": -0.1306466536946816,
-      "end": 8.18,
-      "speaker": "SPEAKER_00",
-      "start": 4.64,
-      "text": "Hi, my name is Charles Joseph. Where do you live?",
-      "words": [
-        {
-          "end": 5.16,
-          "probability": 0.99853515625,
-          "start": 4.64,
-          "word": "Hi,"
-        },
-        {
-          "end": 5.52,
-          "probability": 0.99951171875,
-          "start": 5.26,
-          "word": "my"
-        },
-        {
-          "end": 5.76,
-          "probability": 1,
-          "start": 5.52,
-          "word": "name"
-        },
-        {
-          "end": 5.88,
-          "probability": 1,
-          "start": 5.76,
-          "word": "is"
-        },
-        {
-          "end": 6.16,
-          "probability": 0.99951171875,
-          "start": 5.88,
-          "word": "Charles"
-        },
-        {
-          "end": 6.46,
-          "probability": 0.99853515625,
-          "start": 6.16,
-          "word": "Joseph."
-        },
-        {
-          "end": 7.62,
-          "probability": 1,
-          "start": 7.1,
-          "word": "Where"
-        },
-        {
-          "end": 7.8,
-          "probability": 1,
-          "start": 7.62,
-          "word": "do"
-        },
-        {
-          "end": 7.94,
-          "probability": 1,
-          "start": 7.8,
-          "word": "you"
-        },
-        {
-          "end": 8.18,
-          "probability": 1,
-          "start": 7.94,
-          "word": "live?"
-        }
-      ]
-    },
-    {
-      "avg_logprob": -0.1306466536946816,
-      "end": 15.82,
-      "speaker": "SPEAKER_01",
-      "start": 9.76,
-      "text": "Currently, I live at 43 Old Mill Road, Harvard, Massachusetts. Where do you live?",
-      "words": [
-        {
-          "end": 10.28,
-          "probability": 0.998046875,
-          "start": 9.76,
-          "word": "Currently,"
-        },
-        {
-          "end": 10.64,
-          "probability": 1,
-          "start": 10.28,
-          "word": "I"
-        },
-        {
-          "end": 10.86,
-          "probability": 1,
-          "start": 10.64,
-          "word": "live"
-        },
-        {
-          "end": 11.04,
-          "probability": 1,
-          "start": 10.86,
-          "word": "at"
-        },
-        {
-          "end": 11.38,
-          "probability": 0.99951171875,
-          "start": 11.04,
-          "word": "43"
-        },
-        {
-          "end": 12.1,
-          "probability": 0.99951171875,
-          "start": 11.38,
-          "word": "Old"
-        },
-        {
-          "end": 12.32,
-          "probability": 0.9990234375,
-          "start": 12.1,
-          "word": "Mill"
-        },
-        {
-          "end": 12.6,
-          "probability": 0.99951171875,
-          "start": 12.32,
-          "word": "Road,"
-        },
-        {
-          "end": 13.12,
-          "probability": 0.9990234375,
-          "start": 12.8,
-          "word": "Harvard,"
-        },
-        {
-          "end": 13.82,
-          "probability": 0.99267578125,
-          "start": 13.28,
-          "word": "Massachusetts."
-        },
-        {
-          "end": 15.28,
-          "probability": 1,
-          "start": 14.76,
-          "word": "Where"
-        },
-        {
-          "end": 15.44,
-          "probability": 1,
-          "start": 15.28,
-          "word": "do"
-        },
-        {
-          "end": 15.6,
-          "probability": 1,
-          "start": 15.44,
-          "word": "you"
-        },
-        {
-          "end": 15.82,
-          "probability": 1,
-          "start": 15.6,
-          "word": "live?"
-        }
-      ]
-    },
-    {
-      "avg_logprob": -0.1306466536946816,
-      "end": 26.64,
-      "speaker": "SPEAKER_00",
-      "start": 17.12,
-      "text": "Right now, I live at Fort Cheshire Court, Albany, New York, 12209. How old are you, Jack?",
-      "words": [
-        {
-          "end": 17.64,
-          "probability": 0.9990234375,
-          "start": 17.12,
-          "word": "Right"
-        },
-        {
-          "end": 17.78,
-          "probability": 1,
-          "start": 17.64,
-          "word": "now,"
-        },
-        {
-          "end": 17.96,
-          "probability": 1,
-          "start": 17.8,
-          "word": "I"
-        },
-        {
-          "end": 18.18,
-          "probability": 1,
-          "start": 17.96,
-          "word": "live"
-        },
-        {
-          "end": 18.74,
-          "probability": 1,
-          "start": 18.18,
-          "word": "at"
-        },
-        {
-          "end": 18.98,
-          "probability": 0.97998046875,
-          "start": 18.74,
-          "word": "Fort"
-        },
-        {
-          "end": 19.3,
-          "probability": 0.9669596354166666,
-          "start": 18.98,
-          "word": "Cheshire"
-        },
-        {
-          "end": 19.58,
-          "probability": 0.9990234375,
-          "start": 19.3,
-          "word": "Court,"
-        },
-        {
-          "end": 20.32,
-          "probability": 1,
-          "start": 19.84,
-          "word": "Albany,"
-        },
-        {
-          "end": 20.5,
-          "probability": 0.98828125,
-          "start": 20.4,
-          "word": "New"
-        },
-        {
-          "end": 20.8,
-          "probability": 1,
-          "start": 20.5,
-          "word": "York,"
-        },
-        {
-          "end": 22.9,
-          "probability": 0.9957682291666666,
-          "start": 20.92,
-          "word": "12209."
-        },
-        {
-          "end": 25.84,
-          "probability": 0.99951171875,
-          "start": 25.32,
-          "word": "How"
-        },
-        {
-          "end": 26.1,
-          "probability": 1,
-          "start": 25.84,
-          "word": "old"
-        },
-        {
-          "end": 26.26,
-          "probability": 1,
-          "start": 26.1,
-          "word": "are"
-        },
-        {
-          "end": 26.42,
-          "probability": 1,
-          "start": 26.26,
-          "word": "you,"
-        },
-        {
-          "end": 26.64,
-          "probability": 1,
-          "start": 26.46,
-          "word": "Jack?"
-        }
-      ]
-    },
-    {
-      "avg_logprob": -0.1306466536946816,
-      "end": 32.86,
-      "speaker": "SPEAKER_01",
-      "start": 28.8,
-      "text": "This year, I am 22 years old. How old are you, Charles?",
-      "words": [
-        {
-          "end": 29.32,
-          "probability": 0.99951171875,
-          "start": 28.8,
-          "word": "This"
-        },
-        {
-          "end": 29.54,
-          "probability": 1,
-          "start": 29.32,
-          "word": "year,"
-        },
-        {
-          "end": 29.82,
-          "probability": 1,
-          "start": 29.64,
-          "word": "I"
-        },
-        {
-          "end": 29.98,
-          "probability": 0.9970703125,
-          "start": 29.82,
-          "word": "am"
-        },
-        {
-          "end": 30.34,
-          "probability": 0.9970703125,
-          "start": 29.98,
-          "word": "22"
-        },
-        {
-          "end": 30.72,
-          "probability": 1,
-          "start": 30.34,
-          "word": "years"
-        },
-        {
-          "end": 31.04,
-          "probability": 1,
-          "start": 30.72,
-          "word": "old."
-        },
-        {
-          "end": 31.94,
-          "probability": 0.99951171875,
-          "start": 31.42,
-          "word": "How"
-        },
-        {
-          "end": 32.2,
-          "probability": 1,
-          "start": 31.94,
-          "word": "old"
-        },
-        {
-          "end": 32.34,
-          "probability": 1,
-          "start": 32.2,
-          "word": "are"
-        },
-        {
-          "end": 32.52,
-          "probability": 1,
-          "start": 32.34,
-          "word": "you,"
-        },
-        {
-          "end": 32.86,
-          "probability": 1,
-          "start": 32.56,
-          "word": "Charles?"
-        }
-      ]
-    },
-    {
-      "avg_logprob": -0.09003585723579907,
-      "end": 40.43,
-      "speaker": "SPEAKER_00",
-      "start": 32.86,
-      "text": "Right now, I am 21 years old. What are the last four digits of your SSN?",
-      "words": [
-        {
-          "end": 34.04,
-          "probability": 0.318603515625,
-          "start": 32.86,
-          "word": "Right"
-        },
-        {
-          "end": 35.2,
-          "probability": 0.99560546875,
-          "start": 34.9,
-          "word": "now,"
-        },
-        {
-          "end": 35.58,
+          "end": 1.25,
           "probability": 0.99365234375,
-          "start": 35.3,
-          "word": "I"
-        },
-        {
-          "end": 35.78,
-          "probability": 0.93603515625,
-          "start": 35.58,
-          "word": "am"
-        },
-        {
-          "end": 36.06,
-          "probability": 0.9580078125,
-          "start": 35.78,
-          "word": "21"
-        },
-        {
-          "end": 36.36,
-          "probability": 0.98388671875,
-          "start": 36.06,
-          "word": "years"
-        },
-        {
-          "end": 36.7,
-          "probability": 0.99658203125,
-          "start": 36.36,
-          "word": "old."
-        },
-        {
-          "end": 38.27,
-          "probability": 0.9755859375,
-          "start": 37.59,
-          "word": "What"
-        },
-        {
-          "end": 38.41,
-          "probability": 0.994140625,
-          "start": 38.27,
+          "start": 1.13,
           "word": "are"
         },
         {
-          "end": 38.53,
+          "end": 1.29,
+          "probability": 0.9990234375,
+          "start": 1.25,
+          "word": "you"
+        },
+        {
+          "end": 1.49,
+          "probability": 0.99169921875,
+          "start": 1.29,
+          "word": "doing?"
+        },
+        {
+          "end": 2.09,
+          "probability": 0.8466796875,
+          "start": 1.73,
+          "word": "Good,"
+        },
+        {
+          "end": 2.33,
+          "probability": 0.9921875,
+          "start": 2.21,
+          "word": "how"
+        },
+        {
+          "end": 2.43,
+          "probability": 0.99853515625,
+          "start": 2.33,
+          "word": "are"
+        },
+        {
+          "end": 2.57,
+          "probability": 0.99951171875,
+          "start": 2.43,
+          "word": "you?"
+        },
+        {
+          "end": 3.11,
+          "probability": 0.9560546875,
+          "start": 2.75,
+          "word": "Doing"
+        },
+        {
+          "end": 3.41,
+          "probability": 0.99755859375,
+          "start": 3.11,
+          "word": "good,"
+        },
+        {
+          "end": 3.61,
+          "probability": 0.99365234375,
+          "start": 3.49,
+          "word": "doing"
+        },
+        {
+          "end": 3.83,
+          "probability": 0.99951171875,
+          "start": 3.61,
+          "word": "good."
+        },
+        {
+          "end": 5.05,
+          "probability": 0.88330078125,
+          "start": 4.69,
+          "word": "So"
+        },
+        {
+          "end": 5.41,
+          "probability": 0.63134765625,
+          "start": 5.05,
+          "word": "today"
+        },
+        {
+          "end": 5.91,
+          "probability": 0.95751953125,
+          "start": 5.41,
+          "word": "we"
+        },
+        {
+          "end": 5.99,
+          "probability": 0.96240234375,
+          "start": 5.91,
+          "word": "are"
+        },
+        {
+          "end": 6.15,
+          "probability": 0.93798828125,
+          "start": 5.99,
+          "word": "at"
+        },
+        {
+          "end": 6.43,
           "probability": 0.998046875,
-          "start": 38.41,
+          "start": 6.15,
+          "word": "MIT,"
+        },
+        {
+          "end": 6.75,
+          "probability": 0.994140625,
+          "start": 6.63,
+          "word": "we"
+        },
+        {
+          "end": 6.87,
+          "probability": 0.99755859375,
+          "start": 6.75,
+          "word": "are"
+        },
+        {
+          "end": 7.17,
+          "probability": 0.99951171875,
+          "start": 6.87,
+          "word": "doing"
+        },
+        {
+          "end": 7.35,
+          "probability": 0.99755859375,
+          "start": 7.17,
           "word": "the"
         },
         {
-          "end": 38.79,
-          "probability": 0.99462890625,
-          "start": 38.53,
-          "word": "last"
+          "end": 7.57,
+          "probability": 0.99072265625,
+          "start": 7.35,
+          "word": "Sunday"
         },
         {
-          "end": 38.99,
-          "probability": 0.79443359375,
-          "start": 38.79,
-          "word": "four"
+          "end": 7.85,
+          "probability": 0.595703125,
+          "start": 7.57,
+          "word": "hack."
         },
         {
-          "end": 39.25,
-          "probability": 0.998046875,
-          "start": 38.99,
-          "word": "digits"
+          "end": 8.29,
+          "probability": 0.99951171875,
+          "start": 8.05,
+          "word": "How"
         },
         {
-          "end": 39.59,
-          "probability": 0.99658203125,
-          "start": 39.25,
-          "word": "of"
+          "end": 8.43,
+          "probability": 1,
+          "start": 8.29,
+          "word": "are"
         },
         {
-          "end": 39.77,
-          "probability": 0.9951171875,
-          "start": 39.59,
-          "word": "your"
+          "end": 8.53,
+          "probability": 0.99951171875,
+          "start": 8.43,
+          "word": "you"
         },
         {
-          "end": 40.43,
-          "probability": 0.983642578125,
-          "start": 39.77,
-          "word": "SSN?"
+          "end": 8.75,
+          "probability": 0.99951171875,
+          "start": 8.53,
+          "word": "liking"
+        },
+        {
+          "end": 8.89,
+          "probability": 1,
+          "start": 8.75,
+          "word": "it"
+        },
+        {
+          "end": 8.99,
+          "probability": 0.99951171875,
+          "start": 8.89,
+          "word": "so"
+        },
+        {
+          "end": 9.21,
+          "probability": 1,
+          "start": 8.99,
+          "word": "far?"
         }
       ]
     },
     {
-      "avg_logprob": -0.09003585723579907,
-      "end": 53.38,
-      "speaker": "SPEAKER_01",
-      "start": 42.11,
-      "text": "The last four digits of my social security number is 4226. What is your social security number?",
-      "words": [
-        {
-          "end": 42.71,
-          "probability": 0.96240234375,
-          "start": 42.11,
-          "word": "The"
-        },
-        {
-          "end": 43.05,
-          "probability": 0.7978515625,
-          "start": 42.71,
-          "word": "last"
-        },
-        {
-          "end": 43.77,
-          "probability": 0.97509765625,
-          "start": 43.05,
-          "word": "four"
-        },
-        {
-          "end": 44.11,
-          "probability": 0.99755859375,
-          "start": 43.77,
-          "word": "digits"
-        },
-        {
-          "end": 44.49,
-          "probability": 0.99658203125,
-          "start": 44.11,
-          "word": "of"
-        },
-        {
-          "end": 44.63,
-          "probability": 0.998046875,
-          "start": 44.49,
-          "word": "my"
-        },
-        {
-          "end": 44.91,
-          "probability": 0.7646484375,
-          "start": 44.63,
-          "word": "social"
-        },
-        {
-          "end": 45.25,
-          "probability": 0.9970703125,
-          "start": 44.91,
-          "word": "security"
-        },
-        {
-          "end": 45.67,
-          "probability": 0.99609375,
-          "start": 45.25,
-          "word": "number"
-        },
-        {
-          "end": 46.67,
-          "probability": 0.98193359375,
-          "start": 45.67,
-          "word": "is"
-        },
-        {
-          "end": 48.51,
-          "probability": 0.82666015625,
-          "start": 46.67,
-          "word": "4226."
-        },
-        {
-          "end": 50.72,
-          "probability": 0.99658203125,
-          "start": 50.04,
-          "word": "What"
-        },
-        {
-          "end": 50.9,
-          "probability": 0.99853515625,
-          "start": 50.72,
-          "word": "is"
-        },
-        {
-          "end": 51.18,
-          "probability": 0.97998046875,
-          "start": 50.9,
-          "word": "your"
-        },
-        {
-          "end": 52.44,
-          "probability": 0.98388671875,
-          "start": 51.18,
-          "word": "social"
-        },
-        {
-          "end": 52.88,
-          "probability": 0.99951171875,
-          "start": 52.44,
-          "word": "security"
-        },
-        {
-          "end": 53.38,
-          "probability": 0.99951171875,
-          "start": 52.88,
-          "word": "number?"
-        }
-      ]
-    },
-    {
-      "avg_logprob": -0.09003585723579907,
-      "end": 60.27,
+      "avg_logprob": -0.19148935599529998,
+      "end": 13.51,
       "speaker": "SPEAKER_00",
-      "start": 54.43,
-      "text": "The last four digits of my social security number is 8015.",
+      "start": 9.61,
+      "text": "It's pretty interesting, get to learn something new. I've never done anything with voice cloning before.",
       "words": [
         {
-          "end": 54.77,
-          "probability": 0.99267578125,
-          "start": 54.43,
-          "word": "The"
+          "end": 9.97,
+          "probability": 0.997802734375,
+          "start": 9.61,
+          "word": "It's"
         },
         {
-          "end": 54.97,
+          "end": 10.11,
+          "probability": 1,
+          "start": 9.97,
+          "word": "pretty"
+        },
+        {
+          "end": 10.51,
+          "probability": 1,
+          "start": 10.11,
+          "word": "interesting,"
+        },
+        {
+          "end": 10.73,
+          "probability": 0.8046875,
+          "start": 10.63,
+          "word": "get"
+        },
+        {
+          "end": 10.87,
+          "probability": 1,
+          "start": 10.73,
+          "word": "to"
+        },
+        {
+          "end": 11.17,
+          "probability": 1,
+          "start": 10.87,
+          "word": "learn"
+        },
+        {
+          "end": 11.43,
+          "probability": 1,
+          "start": 11.17,
+          "word": "something"
+        },
+        {
+          "end": 11.63,
           "probability": 0.99951171875,
-          "start": 54.77,
-          "word": "last"
+          "start": 11.43,
+          "word": "new."
         },
         {
-          "end": 55.17,
-          "probability": 0.99609375,
-          "start": 54.97,
-          "word": "four"
-        },
-        {
-          "end": 55.53,
+          "end": 11.75,
           "probability": 0.99951171875,
-          "start": 55.17,
-          "word": "digits"
+          "start": 11.69,
+          "word": "I've"
         },
         {
-          "end": 56.19,
-          "probability": 0.99853515625,
-          "start": 55.53,
-          "word": "of"
+          "end": 11.87,
+          "probability": 1,
+          "start": 11.75,
+          "word": "never"
         },
         {
-          "end": 56.33,
+          "end": 12.07,
+          "probability": 1,
+          "start": 11.87,
+          "word": "done"
+        },
+        {
+          "end": 12.25,
+          "probability": 1,
+          "start": 12.07,
+          "word": "anything"
+        },
+        {
+          "end": 12.55,
+          "probability": 0.99951171875,
+          "start": 12.25,
+          "word": "with"
+        },
+        {
+          "end": 12.77,
+          "probability": 0.97802734375,
+          "start": 12.55,
+          "word": "voice"
+        },
+        {
+          "end": 13.19,
+          "probability": 0.998046875,
+          "start": 12.77,
+          "word": "cloning"
+        },
+        {
+          "end": 13.51,
+          "probability": 1,
+          "start": 13.19,
+          "word": "before."
+        }
+      ]
+    },
+    {
+      "avg_logprob": -0.19148935599529998,
+      "end": 16.67,
+      "speaker": "SPEAKER_01",
+      "start": 14.43,
+      "text": "Amazing, amazing. I mean, that should be enough.",
+      "words": [
+        {
+          "end": 14.79,
           "probability": 0.9990234375,
-          "start": 56.19,
-          "word": "my"
+          "start": 14.43,
+          "word": "Amazing,"
         },
         {
-          "end": 56.59,
-          "probability": 0.99658203125,
-          "start": 56.33,
-          "word": "social"
-        },
-        {
-          "end": 56.93,
+          "end": 15.21,
           "probability": 0.99951171875,
-          "start": 56.59,
-          "word": "security"
+          "start": 14.99,
+          "word": "amazing."
         },
         {
-          "end": 57.33,
-          "probability": 0.9990234375,
-          "start": 56.93,
-          "word": "number"
+          "end": 15.95,
+          "probability": 0.99951171875,
+          "start": 15.63,
+          "word": "I"
         },
         {
-          "end": 58.19,
-          "probability": 0.99755859375,
-          "start": 57.33,
-          "word": "is"
+          "end": 16.13,
+          "probability": 1,
+          "start": 15.95,
+          "word": "mean,"
         },
         {
-          "end": 60.27,
-          "probability": 0.995849609375,
-          "start": 58.19,
-          "word": "8015."
+          "end": 16.25,
+          "probability": 1,
+          "start": 16.15,
+          "word": "that"
+        },
+        {
+          "end": 16.39,
+          "probability": 1,
+          "start": 16.25,
+          "word": "should"
+        },
+        {
+          "end": 16.51,
+          "probability": 1,
+          "start": 16.39,
+          "word": "be"
+        },
+        {
+          "end": 16.67,
+          "probability": 1,
+          "start": 16.51,
+          "word": "enough."
         }
       ]
     }

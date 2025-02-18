@@ -47,29 +47,15 @@
   margin-bottom: 2rem;
 }
 
-/* Upload Section */
-.upload-section {
-  width: 100%;
-  max-width: 1000px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 12px;
-}
-
-.upload-section h2 {
-  color: #61dafb;
-  margin-bottom: 2rem;
-}
-
-/* Audio Container */
-.audio-container {
+/* Audio Container for Demo */
+.demo-section .audio-container {
   display: flex;
   gap: 2rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.audio-section {
+.demo-section .audio-section {
   flex: 1;
   min-width: 300px;
   background: rgba(255, 255, 255, 0.1);
@@ -78,14 +64,32 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.audio-section h3 {
+.demo-section .audio-section h3 {
   margin: 0 0 1rem 0;
   color: #61dafb;
 }
 
-.audio-section audio {
+.demo-section .audio-section audio {
   width: 100%;
   margin-top: 0.5rem;
+}
+
+/* Upload Section */
+.upload-section {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.upload-section h2 {
+  color: #61dafb;
+  margin-bottom: 1rem;
 }
 
 /* Upload Controls */
@@ -97,49 +101,34 @@
 }
 
 .button-group {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
+  margin-bottom: 1rem;
 }
 
 .button-common {
   width: 160px;
-  padding: 12px 0;
+  padding: 12px 24px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
   cursor: pointer;
   border: none;
   border-radius: 8px;
-  transition: all 0.2s;
-  display: block;
-}
-
-.file-label {
   background-color: #61dafb;
   color: #282c34;
+  transition: all 0.2s;
 }
 
-.upload-button {
+.button-common:hover:not(:disabled) {
+  background-color: #4fa8d1;
+}
+
+.button-common:disabled {
   background-color: #cccccc;
   color: #666666;
-}
-
-.upload-button:not(:disabled) {
-  background-color: #61dafb;
-  color: #282c34;
-}
-
-.file-label:hover {
-  background-color: #4fa8d1;
-}
-
-.upload-button:hover:not(:disabled) {
-  background-color: #4fa8d1;
-}
-
-.upload-button:disabled {
   cursor: not-allowed;
 }
 
@@ -147,25 +136,43 @@
   display: none;
 }
 
-/* Audio Preview */
-.audio-preview {
-  margin: 2rem auto;
-  width: 600px;
+/* Try it yourself audio container */
+.upload-section .audio-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.upload-section .audio-preview {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   background: rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
   border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.audio-preview h3 {
+.upload-section .audio-preview h3 {
   color: #61dafb;
   margin: 0 0 1rem 0;
   text-align: center;
 }
 
-.audio-preview audio {
+.upload-section .audio-preview audio {
   width: 100%;
   margin: 0 auto;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
 }

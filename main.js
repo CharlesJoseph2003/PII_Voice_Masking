@@ -287,48 +287,51 @@ async function cloneVoice() {
                 });
             })
             .on('error', (err) => console.error('Error combining audio:', err))
-            .save('./final_output.wav');
+            .save('./final_output_diarize.wav');
 
-        console.log("Voice cloning and combination complete! Final output saved to final_output.wav");
+        console.log("Voice cloning and combination complete! Final output saved to final_output_diarize.wav");
     } catch (error) {
         console.error("Error in voice cloning:", error.message);
         process.exit(1);
     }
 }
 
-// Run the entire pipeline in sequence
-async function main() {
+export async function main() {
     try {
-        console.log("=== Starting Voice Processing Pipeline ===\n");
-
-        // Step 1: Run diarization and wait for completion
-        console.log("Step 1: Running diarization...");
-        await diarizeAudio();
-
-        // Step 2: Run audio extraction
-        console.log("\nStep 2: Running audio extraction...");
+        console.log("\n=== Starting Voice Processing Pipeline ===");
+        console.log("Current time:", new Date().toISOString());
+        
+        // Step 1: Diarize the audio
+        console.log("\nStep 1: Diarizing audio...");
+        console.time('diarization');
+        const diarizedData = await diarizeAudio();
+        console.timeEnd('diarization');
+        
+        // Step 2: Extract audio segments
+        console.log("\nStep 2: Extracting audio segments...");
+        console.time('extraction');
         await extractAudioSegments();
-
-        // Step 3: Run conversation processing
-        console.log("\nStep 3: Running conversation processing...");
+        console.timeEnd('extraction');
+        
+        // Step 3: Process conversation
+        console.log("\nStep 3: Processing conversation...");
+        console.time('conversation');
         await processConversation();
-
-        // Step 4: Run voice cloning
-        console.log("\nStep 4: Running voice cloning...");
+        console.timeEnd('conversation');
+        
+        // Step 4: Clone voice
+        console.log("\nStep 4: Cloning voice...");
+        console.time('cloning');
         await cloneVoice();
-
+        console.timeEnd('cloning');
+        
         console.log("\n=== Pipeline completed successfully! ===");
-        console.log("Generated files:");
-        console.log("1. data.json - Raw diarization output");
-        console.log("2. output_speakers/ - Extracted audio segments");
-        console.log("3. extracted_conversations.json - Extracted conversation");
-        console.log("4. anonymized_conversations.json - Final anonymized conversation");
-        console.log("5. final_output.wav - Cloned voice output");
+        console.log("Current time:", new Date().toISOString());
+        return true;
     } catch (error) {
-        console.error("\nPipeline error:", error.message);
-        process.exit(1);
+        console.error("\n=== Pipeline Error ===");
+        console.error("Error details:", error);
+        console.error("Stack trace:", error.stack);
+        throw error;
     }
 }
-
-// Start the pipeline
-main();
