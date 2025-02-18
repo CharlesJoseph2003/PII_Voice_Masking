@@ -205,36 +205,91 @@ async function cloneVoice() {
         const anonymizedData = JSON.parse(await fs.readFile("./anonymized_conversations.json", 'utf8'));
         const extractedData = JSON.parse(await fs.readFile("./extracted_conversations.json", 'utf8'));
 
-        // Extract all SPEAKER_00 text from anonymized conversations
-        const speaker00Text = anonymizedData.conversations
-            .filter(conv => conv.speaker === "SPEAKER_00")
-            .map(conv => conv.text)
-            .join(" ");
+        // Create a map to store reference audio files for each speaker
+        const speakerAudioFiles = {};
+        
+        // Find reference audio files for each speaker
+        for (const speaker of ['SPEAKER_00', 'SPEAKER_01']) {
+            const possibleFiles = [0, 1, 2];
+            let foundFile = false;
+            
+            for (const index of possibleFiles) {
+                const filePath = `./output_speakers/${speaker}_${index}.wav`;
+                try {
+                    const file = await readFile(filePath);
+                    speakerAudioFiles[speaker] = file;
+                    console.log(`Found reference audio file for ${speaker}: ${filePath}`);
+                    foundFile = true;
+                    break;
+                } catch (err) {
+                    console.log(`File ${filePath} not found, trying next...`);
+                }
+            }
+            
+            if (!foundFile) {
+                throw new Error(`No valid audio file found for ${speaker}`);
+            }
+        }
 
-        // Get the first SPEAKER_00 text from extracted conversations
-        const referenceText = extractedData.conversations
-            .find(conv => conv.speaker === "SPEAKER_00")?.text || "";
+        // Process each conversation segment in order
+        const segments = [];
+        for (const conv of anonymizedData.conversations) {
+            console.log(`Processing segment for ${conv.speaker}...`);
+            
+            // Get reference text for this speaker
+            const referenceText = extractedData.conversations
+                .find(c => c.speaker === conv.speaker)?.text || "";
 
-        const file = await readFile("./output_speakers/SPEAKER_00_1.wav");
+            const input = {
+                gen_text: conv.text,
+                ref_text: referenceText,
+                ref_audio: speakerAudioFiles[conv.speaker]
+            };
 
-        const input = {
-            gen_text: speaker00Text,
-            ref_text: referenceText,
-            ref_audio: file
-        };
+            console.log(`Processing voice clone for segment with Replicate...`);
+            const replicate = new Replicate({
+                auth: REPLICATE_API_TOKEN,
+            });
+            const output = await replicate.run(
+                "x-lance/f5-tts:87faf6dd7a692dd82043f662e76369cab126a2cf1937e25a9d41e0b834fd230e", 
+                { input }
+            );
 
-        console.log("Processing voice clone with Replicate...");
-        const replicate = new Replicate({
-            auth: REPLICATE_API_TOKEN,
+            // Save segment output
+            const segmentFile = `./segment_${segments.length}.wav`;
+            await writeFile(segmentFile, output);
+            segments.push(segmentFile);
+            console.log(`Segment complete! Output saved to ${segmentFile}`);
+        }
+
+        // Combine all segments in order
+        console.log("Combining audio segments...");
+        const command = ffmpeg();
+        
+        // Add all segments as inputs
+        segments.forEach(segment => {
+            command.input(segment);
         });
-        const output = await replicate.run(
-            "x-lance/f5-tts:87faf6dd7a692dd82043f662e76369cab126a2cf1937e25a9d41e0b834fd230e", 
-            { input }
-        );
 
-        console.log("Saving cloned voice to output.wav...");
-        await writeFile("output.wav", output);
-        console.log("Voice cloning complete! Output saved to output.wav");
+        // Create the filter complex string for concatenation
+        const filterComplex = segments.map((_, index) => `[${index}:0]`).join('') + 
+                            `concat=n=${segments.length}:v=0:a=1[out]`;
+
+        // Run the ffmpeg command
+        command
+            .complexFilter(filterComplex)
+            .map('[out]')
+            .on('end', () => {
+                console.log('Audio combination complete!');
+                // Clean up temporary segment files
+                segments.forEach(segment => {
+                    fs.unlink(segment).catch(console.error);
+                });
+            })
+            .on('error', (err) => console.error('Error combining audio:', err))
+            .save('./final_output.wav');
+
+        console.log("Voice cloning and combination complete! Final output saved to final_output.wav");
     } catch (error) {
         console.error("Error in voice cloning:", error.message);
         process.exit(1);
@@ -268,7 +323,7 @@ async function main() {
         console.log("2. output_speakers/ - Extracted audio segments");
         console.log("3. extracted_conversations.json - Extracted conversation");
         console.log("4. anonymized_conversations.json - Final anonymized conversation");
-        console.log("5. output.wav - Cloned voice output");
+        console.log("5. final_output.wav - Cloned voice output");
     } catch (error) {
         console.error("\nPipeline error:", error.message);
         process.exit(1);
