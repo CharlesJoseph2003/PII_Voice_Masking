@@ -205,75 +205,133 @@ async function cloneVoice() {
         const anonymizedData = JSON.parse(await fs.readFile("./anonymized_conversations.json", 'utf8'));
         const extractedData = JSON.parse(await fs.readFile("./extracted_conversations.json", 'utf8'));
 
-        // Extract all SPEAKER_00 text from anonymized conversations
-        const speaker00Text = anonymizedData.conversations
-            .filter(conv => conv.speaker === "SPEAKER_00")
-            .map(conv => conv.text)
-            .join(" ");
+        // Create a map to store reference audio files for each speaker
+        const speakerAudioFiles = {};
+        
+        // Find reference audio files for each speaker
+        for (const speaker of ['SPEAKER_00', 'SPEAKER_01']) {
+            const possibleFiles = [0, 1, 2];
+            let foundFile = false;
+            
+            for (const index of possibleFiles) {
+                const filePath = `./output_speakers/${speaker}_${index}.wav`;
+                try {
+                    const file = await readFile(filePath);
+                    speakerAudioFiles[speaker] = file;
+                    console.log(`Found reference audio file for ${speaker}: ${filePath}`);
+                    foundFile = true;
+                    break;
+                } catch (err) {
+                    console.log(`File ${filePath} not found, trying next...`);
+                }
+            }
+            
+            if (!foundFile) {
+                throw new Error(`No valid audio file found for ${speaker}`);
+            }
+        }
 
-        // Get the first SPEAKER_00 text from extracted conversations
-        const referenceText = extractedData.conversations
-            .find(conv => conv.speaker === "SPEAKER_00")?.text || "";
+        // Process each conversation segment in order
+        const segments = [];
+        for (const conv of anonymizedData.conversations) {
+            console.log(`Processing segment for ${conv.speaker}...`);
+            
+            // Get reference text for this speaker
+            const referenceText = extractedData.conversations
+                .find(c => c.speaker === conv.speaker)?.text || "";
 
-        const file = await readFile("./output_speakers/SPEAKER_00_1.wav");
+            const input = {
+                gen_text: conv.text,
+                ref_text: referenceText,
+                ref_audio: speakerAudioFiles[conv.speaker]
+            };
 
-        const input = {
-            gen_text: speaker00Text,
-            ref_text: referenceText,
-            ref_audio: file
-        };
+            console.log(`Processing voice clone for segment with Replicate...`);
+            const replicate = new Replicate({
+                auth: REPLICATE_API_TOKEN,
+            });
+            const output = await replicate.run(
+                "x-lance/f5-tts:87faf6dd7a692dd82043f662e76369cab126a2cf1937e25a9d41e0b834fd230e", 
+                { input }
+            );
 
-        console.log("Processing voice clone with Replicate...");
-        const replicate = new Replicate({
-            auth: REPLICATE_API_TOKEN,
+            // Save segment output
+            const segmentFile = `./segment_${segments.length}.wav`;
+            await writeFile(segmentFile, output);
+            segments.push(segmentFile);
+            console.log(`Segment complete! Output saved to ${segmentFile}`);
+        }
+
+        // Combine all segments in order
+        console.log("Combining audio segments...");
+        const command = ffmpeg();
+        
+        // Add all segments as inputs
+        segments.forEach(segment => {
+            command.input(segment);
         });
-        const output = await replicate.run(
-            "x-lance/f5-tts:87faf6dd7a692dd82043f662e76369cab126a2cf1937e25a9d41e0b834fd230e", 
-            { input }
-        );
 
-        console.log("Saving cloned voice to output.wav...");
-        await writeFile("output.wav", output);
-        console.log("Voice cloning complete! Output saved to output.wav");
+        // Create the filter complex string for concatenation
+        const filterComplex = segments.map((_, index) => `[${index}:0]`).join('') + 
+                            `concat=n=${segments.length}:v=0:a=1[out]`;
+
+        // Run the ffmpeg command
+        command
+            .complexFilter(filterComplex)
+            .map('[out]')
+            .on('end', () => {
+                console.log('Audio combination complete!');
+                // Clean up temporary segment files
+                segments.forEach(segment => {
+                    fs.unlink(segment).catch(console.error);
+                });
+            })
+            .on('error', (err) => console.error('Error combining audio:', err))
+            .save('./final_output_diarize.wav');
+
+        console.log("Voice cloning and combination complete! Final output saved to final_output_diarize.wav");
     } catch (error) {
         console.error("Error in voice cloning:", error.message);
         process.exit(1);
     }
 }
 
-// Run the entire pipeline in sequence
-async function main() {
+export async function main() {
     try {
-        console.log("=== Starting Voice Processing Pipeline ===\n");
-
-        // Step 1: Run diarization and wait for completion
-        console.log("Step 1: Running diarization...");
-        await diarizeAudio();
-
-        // Step 2: Run audio extraction
-        console.log("\nStep 2: Running audio extraction...");
+        console.log("\n=== Starting Voice Processing Pipeline ===");
+        console.log("Current time:", new Date().toISOString());
+        
+        // Step 1: Diarize the audio
+        console.log("\nStep 1: Diarizing audio...");
+        console.time('diarization');
+        const diarizedData = await diarizeAudio();
+        console.timeEnd('diarization');
+        
+        // Step 2: Extract audio segments
+        console.log("\nStep 2: Extracting audio segments...");
+        console.time('extraction');
         await extractAudioSegments();
-
-        // Step 3: Run conversation processing
-        console.log("\nStep 3: Running conversation processing...");
+        console.timeEnd('extraction');
+        
+        // Step 3: Process conversation
+        console.log("\nStep 3: Processing conversation...");
+        console.time('conversation');
         await processConversation();
-
-        // Step 4: Run voice cloning
-        console.log("\nStep 4: Running voice cloning...");
+        console.timeEnd('conversation');
+        
+        // Step 4: Clone voice
+        console.log("\nStep 4: Cloning voice...");
+        console.time('cloning');
         await cloneVoice();
-
+        console.timeEnd('cloning');
+        
         console.log("\n=== Pipeline completed successfully! ===");
-        console.log("Generated files:");
-        console.log("1. data.json - Raw diarization output");
-        console.log("2. output_speakers/ - Extracted audio segments");
-        console.log("3. extracted_conversations.json - Extracted conversation");
-        console.log("4. anonymized_conversations.json - Final anonymized conversation");
-        console.log("5. output.wav - Cloned voice output");
+        console.log("Current time:", new Date().toISOString());
+        return true;
     } catch (error) {
-        console.error("\nPipeline error:", error.message);
-        process.exit(1);
+        console.error("\n=== Pipeline Error ===");
+        console.error("Error details:", error);
+        console.error("Stack trace:", error.stack);
+        throw error;
     }
 }
-
-// Start the pipeline
-main();

@@ -1,0 +1,178 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #282c34;
+  color: white;
+}
+
+.App-header {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #61dafb;
+}
+
+.App-header p {
+  margin: 1rem 0 0;
+  font-size: 1.2rem;
+  color: #bbb;
+}
+
+.App-main {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Demo Section */
+.demo-section {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.demo-section h2 {
+  color: #61dafb;
+  margin-bottom: 2rem;
+}
+
+/* Audio Container for Demo */
+.demo-section .audio-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.demo-section .audio-section {
+  flex: 1;
+  min-width: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.demo-section .audio-section h3 {
+  margin: 0 0 1rem 0;
+  color: #61dafb;
+}
+
+.demo-section .audio-section audio {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Upload Section */
+.upload-section {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.upload-section h2 {
+  color: #61dafb;
+  margin-bottom: 1rem;
+}
+
+/* Upload Controls */
+.upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.button-group {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1rem;
+}
+
+.button-common {
+  width: 160px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: #61dafb;
+  color: #282c34;
+  transition: all 0.2s;
+}
+
+.button-common:hover:not(:disabled) {
+  background-color: #4fa8d1;
+}
+
+.button-common:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.file-input {
+  display: none;
+}
+
+/* Try it yourself audio container */
+.upload-section .audio-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.upload-section .audio-preview {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.upload-section .audio-preview h3 {
+  color: #61dafb;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
+
+.upload-section .audio-preview audio {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
+}
