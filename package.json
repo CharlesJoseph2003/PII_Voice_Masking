@@ -9,9 +9,7 @@
     "replicate": "^1.0.1"
   },
   "scripts": {
-    "start": "node frontend/server/main.js",
-    "build": "cd frontend && npm run build",
-    "vercel-build": "npm run build"
+    "start": "node frontend/server/main.js"
   },
   "engines": {
     "node": ">=18.0.0"

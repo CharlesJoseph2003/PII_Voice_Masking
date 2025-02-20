@@ -9,7 +9,8 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "build",
+        "buildCommand": "cd frontend && npm install && npm run build"
       }
     }
   ],
@@ -19,7 +20,20 @@
       "dest": "frontend/server/main.js"
     },
     {
-      "handle": "filesystem"
+      "src": "/static/(.*)",
+      "dest": "frontend/build/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "frontend/build/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "frontend/build/manifest.json"
+    },
+    {
+      "src": "/(.*)\\.(?:json|ico|png|jpg|jpeg|svg|css|js)",
+      "dest": "frontend/build/$1.$2"
     },
     {
       "src": "/(.*)",
