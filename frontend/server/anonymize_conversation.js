@@ -1,5 +1,10 @@
 import OpenAI from "openai";
 import { promises as fs } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Add your OpenAI API key here as a string
 const openai = new OpenAI({
@@ -7,8 +12,12 @@ const openai = new OpenAI({
 
 async function anonymizeConversation(inputFile, outputFile) {
     try {
+        // Create paths relative to the server directory
+        const inputPath = join(__dirname, inputFile);
+        const outputPath = join(__dirname, outputFile);
+
         // Read the conversation from the input file
-        const rawData = await fs.readFile(inputFile, 'utf8');
+        const rawData = await fs.readFile(inputPath, 'utf8');
         const conversationData = JSON.parse(rawData);
 
         // Prepare the conversation for GPT
@@ -50,20 +59,21 @@ Provide only the anonymized conversation in the exact same format, nothing else.
             conversations: anonymizedLines.map(line => {
                 const [speaker, ...textParts] = line.split(': ');
                 return {
-                    speaker: speaker.trim(),
-                    text: textParts.join(': ').trim()
+                    speaker: speaker,
+                    text: textParts.join(': ')
                 };
             })
         };
 
         // Write the anonymized conversation to the output file
-        await fs.writeFile(outputFile, JSON.stringify(anonymizedConversation, null, 2));
-        console.log(`Anonymized conversation saved to ${outputFile}`);
+        await fs.writeFile(outputPath, JSON.stringify(anonymizedConversation, null, 2));
+        console.log('Anonymization completed successfully');
+        return anonymizedConversation;
     } catch (error) {
-        console.error('Error:', error.message);
-        process.exit(1);
+        console.error('Error in anonymization:', error);
+        throw error;
     }
 }
 
 // Run the anonymization
-anonymizeConversation('extracted_conversations.json', 'anonymized_conversations.json');
+anonymizeConversation('data/extracted_conversations.json', 'data/anonymized_conversations.json');

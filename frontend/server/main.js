@@ -5,9 +5,14 @@ import { promises as fs } from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import OpenAI from "openai";
 import { OPENAI_API_KEY } from './config.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-const audioFile = 'input.wav';
-const jsonFile = 'data.json';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const audioFile = join(__dirname, 'uploads', 'input.wav');
+const jsonFile = join(__dirname, 'data', 'data.json');
 
 async function diarizeAudio() {
     try {
@@ -49,19 +54,16 @@ async function extractAudioSegments() {
         const segments = jsonData.segments;
 
         // Ensure output folder exists
-        const outputFolder = 'output_speakers';
-        try {
-            await fs.access(outputFolder);
-        } catch {
-            await fs.mkdir(outputFolder);
-        }
+        const outputFolder = join(__dirname, 'output_speakers');
+        await fs.mkdir(join(__dirname, 'data'), { recursive: true });
+        await fs.mkdir(outputFolder, { recursive: true });
 
         // Extract segments for each speaker
         for (const [index, segment] of segments.entries()) {
             const startTime = segment.start;
             const duration = segment.end - segment.start;
             const speaker = segment.speaker;
-            const outputFile = `${outputFolder}/${speaker}_${index}.wav`;
+            const outputFile = join(outputFolder, `${speaker}_${index}.wav`);
 
             console.log(`Extracting ${speaker} from ${startTime}s to ${segment.end}s...`);
 
@@ -180,14 +182,14 @@ async function processConversation() {
         console.log('Step 1: Extracting conversation...');
         const extractedData = await extractSpeakerText(
             jsonFile,
-            'extracted_conversations.json'
+            join(__dirname, 'data', 'extracted_conversations.json')
         );
 
         // Step 2: Anonymize the extracted conversation
         console.log('\nStep 2: Anonymizing conversation...');
         await anonymizeConversation(
             extractedData,
-            'anonymized_conversations.json'
+            join(__dirname, 'data', 'anonymized_conversations.json')
         );
 
         console.log('\nProcess completed successfully!');
@@ -202,8 +204,8 @@ async function cloneVoice() {
         console.log("Starting voice cloning...");
         
         // Read and parse both conversation files
-        const anonymizedData = JSON.parse(await fs.readFile("./anonymized_conversations.json", 'utf8'));
-        const extractedData = JSON.parse(await fs.readFile("./extracted_conversations.json", 'utf8'));
+        const anonymizedData = JSON.parse(await fs.readFile(join(__dirname, 'data', 'anonymized_conversations.json'), 'utf8'));
+        const extractedData = JSON.parse(await fs.readFile(join(__dirname, 'data', 'extracted_conversations.json'), 'utf8'));
 
         // Create a map to store reference audio files for each speaker
         const speakerAudioFiles = {};
@@ -214,7 +216,7 @@ async function cloneVoice() {
             let foundFile = false;
             
             for (const index of possibleFiles) {
-                const filePath = `./output_speakers/${speaker}_${index}.wav`;
+                const filePath = join(__dirname, 'output_speakers', `${speaker}_${index}.wav`);
                 try {
                     const file = await readFile(filePath);
                     speakerAudioFiles[speaker] = file;
@@ -256,7 +258,7 @@ async function cloneVoice() {
             );
 
             // Save segment output
-            const segmentFile = `./segment_${segments.length}.wav`;
+            const segmentFile = join(__dirname, `segment_${segments.length}.wav`);
             await writeFile(segmentFile, output);
             segments.push(segmentFile);
             console.log(`Segment complete! Output saved to ${segmentFile}`);
@@ -287,9 +289,9 @@ async function cloneVoice() {
                 });
             })
             .on('error', (err) => console.error('Error combining audio:', err))
-            .save('./final_output_diarize.wav');
+            .save(join(__dirname, 'output_speakers', 'final_output_diarize.wav'));
 
-        console.log("Voice cloning and combination complete! Final output saved to final_output_diarize.wav");
+        console.log("Voice cloning and combination complete! Final output saved to output_speakers/final_output_diarize.wav");
     } catch (error) {
         console.error("Error in voice cloning:", error.message);
         process.exit(1);

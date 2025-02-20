@@ -1,6 +1,11 @@
 import Replicate from "replicate";
 import { readFile, writeFile } from "node:fs/promises";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { REPLICATE_API_TOKEN } from './config.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 async function diarizeAudio() {
     try {
@@ -8,8 +13,9 @@ async function diarizeAudio() {
             auth: REPLICATE_API_TOKEN,
         });
 
+        const inputPath = join(__dirname, 'uploads', 'input.wav');
         console.log("Reading audio file...");
-        const file = await readFile("input.wav");
+        const file = await readFile(inputPath);
 
         console.log("Processing audio with Whisper diarization...");
         const input = {
@@ -25,12 +31,13 @@ async function diarizeAudio() {
             { input }
         );
 
+        const outputPath = join(__dirname, 'data', 'data.json');
         console.log("Saving output to data.json...");
-        await writeFile('data.json', JSON.stringify(output, null, 2));
+        await writeFile(outputPath, JSON.stringify(output, null, 2));
         console.log("Diarization complete! Output saved to data.json");
     } catch (error) {
         console.error("Error:", error.message);
-        process.exit(1);
+        throw error;
     }
 }
 
