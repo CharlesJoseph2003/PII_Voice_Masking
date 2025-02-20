@@ -1,10 +1,8 @@
 import Replicate from "replicate";
 import { readFile, writeFile } from "node:fs/promises";
-import { REPLICATE_API_TOKEN } from './config.js';
 import { promises as fs } from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import OpenAI from "openai";
-import { OPENAI_API_KEY } from './config.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -14,12 +12,18 @@ const __dirname = dirname(__filename);
 const audioFile = join(__dirname, 'uploads', 'input.wav');
 const jsonFile = join(__dirname, 'data', 'data.json');
 
+// Initialize Replicate with API key from environment variable
+const replicate = new Replicate({
+    auth: process.env.REPLICATE_API_TOKEN,
+});
+
+// Initialize OpenAI with API key from environment variable
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+});
+
 async function diarizeAudio() {
     try {
-        const replicate = new Replicate({
-            auth: REPLICATE_API_TOKEN,
-        });
-
         console.log("Reading audio file...");
         const file = await readFile(audioFile);
 
@@ -90,11 +94,6 @@ async function extractAudioSegments() {
         process.exit(1);
     }
 }
-
-// Initialize OpenAI with API key from config
-const openai = new OpenAI({
-    apiKey: OPENAI_API_KEY
-});
 
 async function extractSpeakerText(inputFile, outputFile) {
     try {
@@ -250,7 +249,7 @@ async function cloneVoice() {
 
             console.log(`Processing voice clone for segment with Replicate...`);
             const replicate = new Replicate({
-                auth: REPLICATE_API_TOKEN,
+                auth: process.env.REPLICATE_API_TOKEN,
             });
             const output = await replicate.run(
                 "x-lance/f5-tts:87faf6dd7a692dd82043f662e76369cab126a2cf1937e25a9d41e0b834fd230e", 
