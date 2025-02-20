@@ -5,12 +5,35 @@ import ffmpeg from 'fluent-ffmpeg';
 import OpenAI from "openai";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import express from 'express';
+import multer from 'multer';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const audioFile = join(__dirname, 'uploads', 'input.wav');
 const jsonFile = join(__dirname, 'data', 'data.json');
+
+// Initialize Express
+const app = express();
+const port = process.env.PORT || 3001;
+
+// Configure multer for file upload
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, join(__dirname, 'uploads'));
+    },
+    filename: function (req, file, cb) {
+        console.log('Receiving file:', file.originalname);
+        cb(null, 'input.wav');
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Enable CORS
+app.use(cors());
 
 // Initialize Replicate with API key from environment variable
 const replicate = new Replicate({
@@ -336,3 +359,20 @@ export async function main() {
         throw error;
     }
 }
+
+// API Endpoints
+app.post('/api/upload', upload.single('audio'), async (req, res) => {
+    try {
+        console.log('File uploaded successfully');
+        await main();
+        res.json({ message: 'Processing complete' });
+    } catch (error) {
+        console.error('Error processing file:', error);
+        res.status(500).json({ error: 'Error processing file' });
+    }
+});
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
